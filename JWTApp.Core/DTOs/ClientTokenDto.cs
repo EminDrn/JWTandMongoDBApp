@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JWTApp.Core.DTOs
 {
-    public class ClientTokenDtoi
+    public class ClientTokenDto
     {
         public string AccessToken { get; set; }
         public DateTime AccessTokenExpiration { get; set; }
