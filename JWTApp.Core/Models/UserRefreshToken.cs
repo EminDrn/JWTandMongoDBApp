@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +10,7 @@ namespace JWTApp.Core.Models
 {
     public  class UserRefreshToken
     {
+        [BsonRepresentation(BsonType.ObjectId)]
         public string UserId { get; set; }
 
         public string Code { get; set; }

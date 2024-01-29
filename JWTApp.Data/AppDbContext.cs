@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace JWTApp.Data
 {
-    public class AppDbContext:IdentityDbContext<User , IdentityRole , string>
+    public class AppDbContext : IdentityDbContext<User, IdentityRole, string>
     {
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
