@@ -1,4 +1,6 @@
 ﻿using JWTApp.Core.Repository;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,34 +12,47 @@ namespace JWTApp.Data.Repositories
 {
     public class GenericRepository<Tentity> : IGenericRepository<Tentity> where Tentity : class
     {
-        public Task AddAsync(Tentity entity)
+        private readonly IMongoCollection<Tentity> _collection;
+        public GenericRepository(IMongoDatabase database, string collectionName)
         {
-            throw new NotImplementedException();
+            _collection = database.GetCollection<Tentity>(collectionName);
+        }
+        public async Task AddAsync(Tentity entity)
+        {
+            await _collection.InsertOneAsync(entity);
         }
 
-        public Task<IEnumerable<Tentity>> GetAllAsync()
+        public async Task<IEnumerable<Tentity>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var entities = await _collection.Find(_ => true).ToListAsync();
+            return entities;
         }
 
-        public Task<Tentity> GetByIdAsync(int id)
+        public async Task<Tentity> GetByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            var objectId = new ObjectId(id);
+            var entity = await _collection.Find(e => e.GetType().GetProperty("Id").GetValue(e).Equals(objectId)).FirstOrDefaultAsync();
+            return entity;
         }
 
         public void Remove(Tentity entity)
         {
-            throw new NotImplementedException();
+            var objectId = entity.GetType().GetProperty("Id").GetValue(entity);
+            var filter = Builders<Tentity>.Filter.Eq("Id", objectId);
+            _collection.DeleteOne(filter);
         }
 
         public Tentity Update(Tentity entity)
         {
-            throw new NotImplementedException();
+            var objectId = entity.GetType().GetProperty("Id").GetValue(entity);
+            var filter = Builders<Tentity>.Filter.Eq("Id", objectId);
+            var result = _collection.ReplaceOne(filter, entity);
+            return entity;
         }
 
         public IQueryable<Tentity> Where(Expression<Func<Tentity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return _collection.AsQueryable().Where(predicate);
         }
     }
 }

@@ -22,24 +22,24 @@ namespace JWTApp.Data
         public DbSet<UserRefreshToken> userRefreshTokens { get; set; }
 
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            foreach (var entityType in builder.Model.GetEntityTypes())
-            {
-                foreach (var property in entityType.GetProperties())
-                {
-                    if (property.ClrType == typeof(DateTime))
-                    {
-                        property.SetValueConverter(new ValueConverter<DateTime, DateTime>(
-                            v => v.ToUniversalTime(),
-                            v => DateTime.SpecifyKind(v, DateTimeKind.Utc)));
-                    }
-                }
-            }
+        //protected override void OnModelCreating(ModelBuilder builder)
+        //{
+        //    foreach (var entityType in builder.Model.GetEntityTypes())
+        //    {
+        //        foreach (var property in entityType.GetProperties())
+        //        {
+        //            if (property.ClrType == typeof(DateTime))
+        //            {
+        //                property.SetValueConverter(new ValueConverter<DateTime, DateTime>(
+        //                    v => v.ToUniversalTime(),
+        //                    v => DateTime.SpecifyKind(v, DateTimeKind.Utc)));
+        //            }
+        //        }
+        //    }
 
 
-            builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
-            base.OnModelCreating(builder);
-        }
+        //    builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+        //    base.OnModelCreating(builder);
+        //}
     }
 }
