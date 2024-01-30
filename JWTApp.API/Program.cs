@@ -1,5 +1,6 @@
 using JWTApp.Data;
 using JWTApp.Data.MongoDbSettings;
+using JWTApp.Service;
 using Microsoft.Extensions.Options;
 using System;
 
@@ -13,7 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //var appsettingsSection = builder.Configuration.GetSection("AppSettings");
 //builder.Services.Configure<MongoDbSettings>(appsettingsSection);
-
+builder.Services.AddAutoMapper(typeof(DtoMapper));
 builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDbConnectionSettings"));
 builder.Services.AddSingleton<IMongoDBSettings>(sp =>
 {
