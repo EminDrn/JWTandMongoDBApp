@@ -1,4 +1,6 @@
 ﻿using JWTApp.Core.Repository;
+using JWTApp.Data.MongoDbSettings;
+using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -13,9 +15,14 @@ namespace JWTApp.Data.Repositories
     public class GenericRepository<Tentity> : IGenericRepository<Tentity> where Tentity : class
     {
         private readonly IMongoCollection<Tentity> _collection;
-        public GenericRepository(IMongoDatabase database, string collectionName)
+        public GenericRepository(IOptions<MongoDbSettings.MongoDbSettings> database, string collectionName)
         {
-            _collection = database.GetCollection<Tentity>(collectionName);
+            var mongoClient = new MongoClient(
+                database.Value.ConnectionString);
+            var mongoDatbase = mongoClient.GetDatabase(
+               database.Value.DatabaseName );
+
+            _collection = mongoDatbase.GetCollection<Tentity>(database.Value.CollectionName);
         }
         public async Task AddAsync(Tentity entity)
         {

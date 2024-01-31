@@ -15,6 +15,10 @@ namespace JWTApp.Service
         {
             CreateMap<MovieDto, Movie>().ReverseMap();
             CreateMap<UserDto, User>().ReverseMap();
+            CreateMap<CreateUserDTo , User>().ReverseMap();
+            CreateMap<LoginDto , User>().ReverseMap();
+
+            
         }
     }
 }

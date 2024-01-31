@@ -11,35 +11,35 @@ using System.Threading.Tasks;
 
 namespace JWTApp.Data
 {
-    public class AppDbContext : IdentityDbContext<User, IdentityRole, string>
+    public class AppDbContext :DbContext
     {
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-
         }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<UserRefreshToken> userRefreshTokens { get; set; }
+        public DbSet<User> Users { get; set; }
 
 
-        //protected override void OnModelCreating(ModelBuilder builder)
-        //{
-        //    foreach (var entityType in builder.Model.GetEntityTypes())
-        //    {
-        //        foreach (var property in entityType.GetProperties())
-        //        {
-        //            if (property.ClrType == typeof(DateTime))
-        //            {
-        //                property.SetValueConverter(new ValueConverter<DateTime, DateTime>(
-        //                    v => v.ToUniversalTime(),
-        //                    v => DateTime.SpecifyKind(v, DateTimeKind.Utc)));
-        //            }
-        //        }
-        //    }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            foreach (var entityType in builder.Model.GetEntityTypes())
+            {
+                foreach (var property in entityType.GetProperties())
+                {
+                    if (property.ClrType == typeof(DateTime))
+                    {
+                        property.SetValueConverter(new ValueConverter<DateTime, DateTime>(
+                            v => v.ToUniversalTime(),
+                            v => DateTime.SpecifyKind(v, DateTimeKind.Utc)));
+                    }
+                }
+            }
 
 
-        //    builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
-        //    base.OnModelCreating(builder);
-        //}
+            builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+            base.OnModelCreating(builder);
+        }
     }
 }
