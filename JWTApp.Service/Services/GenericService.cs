@@ -14,7 +14,7 @@ namespace JWTApp.Service.Services
 {
     public class GenericService<TEntity, TDto> : IServiceGeneric<TEntity , TDto> where TEntity : class where TDto : class
     {
-        private readonly IGenericRepository<TEntity> _genericRepository;
+       
 
         public GenericService(IGenericRepository<TEntity> genericRepository)
         {

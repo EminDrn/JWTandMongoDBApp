@@ -1,10 +1,8 @@
 using JWTApp.Core.Configuration;
 using JWTApp.Core.Models;
-using JWTApp.Core.Repository;
 using JWTApp.Core.Services;
 using JWTApp.Data;
 using JWTApp.Data.MongoDbSettings;
-using JWTApp.Data.Repositories;
 using JWTApp.Service;
 using JWTApp.Service.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -29,7 +27,6 @@ builder.Services.AddSingleton<IMongoDatabase>(sp =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
 builder.Services.Configure<CustomTokenOptions>(builder.Configuration.GetSection("TokenOption"));
 builder.Services.Configure<List<Client>>(builder.Configuration.GetSection("Clients"));

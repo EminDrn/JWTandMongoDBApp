@@ -1,7 +1,6 @@
 ﻿using JWTApp.Core.Configuration;
 using JWTApp.Core.DTOs;
 using JWTApp.Core.Models;
-using JWTApp.Core.Repository;
 using JWTApp.Core.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;

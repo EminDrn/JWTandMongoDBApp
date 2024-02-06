@@ -6,6 +6,7 @@ using SharedLibrary.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,6 +43,36 @@ namespace JWTApp.Service.Services
             }
 
             return Response<UserDto>.Success(ObjectMapper.Mapper.Map<UserDto>(user), 200);
+        }
+
+        public Task<Response<UserDto>> GetByIdAsync(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response<IEnumerable<UserDto>>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response<IEnumerable<UserDto>>> Where(Expression<Func<UserDto, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response<UserDto>> AddAsync(UserDto entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response<NoDataDto>> Remove(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response<NoDataDto>> Update(UserDto entity, string id)
+        {
+            throw new NotImplementedException();
         }
     }
 
