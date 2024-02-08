@@ -1,14 +1,7 @@
-﻿using AutoMapper;
-using JWTApp.Core.DTOs;
-using JWTApp.Core.Models;
+﻿using System.Text;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace JWTApp.Service
+namespace JWTApp.Mapper
 {
     public static class SignService
     {

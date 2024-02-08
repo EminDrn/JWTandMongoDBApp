@@ -16,12 +16,10 @@ using SharedLibrary.Configuration;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MovieDatabase"));
-builder.Services.AddSingleton<IMongoDatabase>(sp =>
+builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDbSettings"));
+builder.Services.AddSingleton<IMongoDbSettings>(sp =>
 {
-    var mongoClient = new MongoClient(builder.Configuration.GetConnectionString("ConnectionString"));
-    return mongoClient.GetDatabase("MovieAppDatabase");
+    return sp.GetRequiredService<IOptions<MongoDbSettings>>().Value;
 });
 
 builder.Services.AddControllers();
@@ -34,7 +32,6 @@ builder.Services.Configure<List<Client>>(builder.Configuration.GetSection("Clien
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddScoped(typeof(IServiceGeneric<,>), typeof(GenericService<,>));
 
 builder.Services.AddAuthentication(opt =>
 {

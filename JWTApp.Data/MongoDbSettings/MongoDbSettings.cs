@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JWTApp.Data.MongoDbSettings
 {
-    public class MongoDbSettings
+    public class MongoDbSettings : IMongoDbSettings
     {
         public string UserCollection { get; set; }
         

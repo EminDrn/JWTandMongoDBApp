@@ -16,7 +16,7 @@ namespace JWTApp.Core.Services
         Task<Response<UserDto>> GetUserByNameAsync(string userName);
         Task<Response<UserDto>> GetByIdAsync(string id);
         Task<Response<IEnumerable<UserDto>>> GetAllAsync();
-        Task<Response<IEnumerable<UserDto>>> Where(Expression<Func<UserDto, bool>> predicate);
+        Task<Response<IEnumerable<UserDto>>> Where(Expression<Func<User, bool>> predicate);
         Task<Response<UserDto>> AddAsync(UserDto entity);
         Task<Response<NoDataDto>> Remove(string id);
         Task<Response<NoDataDto>> Update(UserDto entity, string id);
