@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using Microsoft.AspNetCore.Identity;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace JWTApp.Models.Entities;

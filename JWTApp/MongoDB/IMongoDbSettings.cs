@@ -9,5 +9,6 @@
         public string TokenCollection { get; set; }
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }
+        public string UserRefreshTokenCollection { get; set; }
     }
 }

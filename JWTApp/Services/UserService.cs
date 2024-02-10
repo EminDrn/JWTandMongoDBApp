@@ -105,6 +105,34 @@ namespace JWTApp.Services
             var dtos = ObjectMapper.Mapper.Map<IEnumerable<UserDto>>(entities);
             return Response<IEnumerable<UserDto>>.Success(dtos, 200);
         }
+        
+        
+        
+        public async Task<User> GetByUserIdAsync(string id)
+        {
+            var user = await _userCollection.Find(x => x.Id == id).SingleOrDefaultAsync();
 
+            return user;
+        }
+
+        public async Task<User> FindByEmail(string email)
+        {
+
+            var user = await _userCollection.Find(x => x.Email == email).SingleOrDefaultAsync();
+            return user;
+
+        }
+
+        public async Task<bool> CheckPasswordAsync( string id , string password)
+        {
+            var user = await _userCollection.Find(x => x.Id == id).SingleOrDefaultAsync();
+            if(user.Password == password)
+            return true;
+
+            else
+            {
+                return false;
+            }
+        }
     }
 }

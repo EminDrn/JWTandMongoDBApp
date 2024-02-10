@@ -15,4 +15,10 @@ public interface IUserService
     Task<Response<UserDto>> AddAsync(UserDto entity);
     Task<Response<NoDataDto>> Remove(string id);
     Task<Response<NoDataDto>> Update(UserDto entity, string id);
+
+    Task<bool> CheckPasswordAsync(string userId,string password);
+
+    Task<User> FindByEmail(string email);
+    Task<User> GetByUserIdAsync(string userId);
+
 }
