@@ -46,15 +46,17 @@ public class AuthenticationService:IAuthenticationService
         }
 
         var token = _tokenService.CreateToken(user);
-        var userRefreshToken = _userCollection.Find(x => x.UserId == user.Id).FirstOrDefault();
+        var userRefreshToken = await  _userCollection.Find(x => x.UserId == user.Id).SingleOrDefaultAsync();
         if (userRefreshToken == null)
         {
             await _userRefreshTokenService.AddAsync(new UserRefreshToken { UserId = user.Id, Code = token.RefreshToken, Expiration = token.RefreshTokenExpiration });
         }
         else
         {
+            
             userRefreshToken.Code = token.RefreshToken;
             userRefreshToken.Expiration = token.RefreshTokenExpiration;
+            await _userCollection.ReplaceOneAsync(x => x.UserId == user.Id, userRefreshToken);
         }
 
         return Response<TokenDto>.Success(token, 200);
@@ -78,7 +80,9 @@ public class AuthenticationService:IAuthenticationService
         var tokenDto = _tokenService.CreateToken(user);
         existRefrehToken.Code = tokenDto.RefreshToken;
         existRefrehToken.Expiration = tokenDto.RefreshTokenExpiration;
-         return Response<TokenDto>.Success(tokenDto , 200);
+        await _userCollection.ReplaceOneAsync(x => x.UserId == user.Id, existRefrehToken);
+
+        return Response<TokenDto>.Success(tokenDto , 200);
     }
 
     public async Task<Response<NoDataDto>> RevokeRefreshToken(string refreshToken)

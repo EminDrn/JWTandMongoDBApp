@@ -20,4 +20,25 @@ public class AuthController : BaseController
         var result = await _authenticationService.CreateTokenAsync(loginDto);
         return ActionResultInstance(result);
     }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateTokenByClient(ClientLoginDto clientLoginDto)
+    {
+        var result =  _authenticationService.CreateTokenByClient(clientLoginDto);
+        return ActionResultInstance(result);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> RevokeRefreshToken(RefreshTokenDto refreshTokenDto)
+    {
+        var result = await _authenticationService.RevokeRefreshToken(refreshTokenDto.Token);
+        return ActionResultInstance(result);
+    }
+    [HttpPost]
+    public async Task<IActionResult> CreateTokenByRefreshToken(RefreshTokenDto refreshTokenDto)
+    {
+        var result = await _authenticationService.CreateTokenByRefreshToken(refreshTokenDto.Token);
+        return ActionResultInstance(result);
+    }
+    
 }

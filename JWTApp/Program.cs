@@ -29,6 +29,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserRefreshTokenService, UserRefreshTokenService>();
+builder.Services.AddScoped<IMovieService, MovieService>();
+
 
 builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDbSettings"));
 builder.Services.Configure<List<Client>>(builder.Configuration.GetSection("Clients"));

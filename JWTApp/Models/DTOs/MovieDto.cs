@@ -2,7 +2,6 @@
 {
     public class MovieDto
     {
-        public int Id { get; set; }
 
         public string MovieName { get; set; }
 
