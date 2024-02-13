@@ -30,6 +30,7 @@ builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserRefreshTokenService, UserRefreshTokenService>();
 builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
 
 
 builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDbSettings"));

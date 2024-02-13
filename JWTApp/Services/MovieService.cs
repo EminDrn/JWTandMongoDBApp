@@ -27,7 +27,7 @@ public class MovieService:IMovieService
         var movie = new Movie
         {
             MovieName = movieDto.MovieName, MovieDescription = movieDto.MovieDescription,
-            MoviePhoto = movieDto.MoviePhoto, Rating = 0, ReleaseDate = DateTime.UtcNow
+            MoviePhoto = movieDto.MoviePhoto, Rating = 0, ReleaseDate = DateTime.UtcNow, RateCounter = 0
         };
         
         await _movieCollection.InsertOneAsync(movie);
@@ -91,5 +91,22 @@ public class MovieService:IMovieService
         }
         return Response<NoDataDto>.Success(200);
 
+    }
+
+    public async Task<Response<NoDataDto>> RateMove(string id, double rate)
+    {
+        var movie = await _movieCollection.Find(x => x.Id == id).SingleOrDefaultAsync();
+        var totalRating = movie.RateCounter * movie.Rating;
+        totalRating = totalRating + rate;
+        movie.RateCounter = movie.RateCounter + 1;
+
+
+
+        movie.Rating = totalRating / movie.RateCounter;
+
+        
+        
+        await _movieCollection.ReplaceOneAsync(x => x.Id == id, movie);
+        return Response<NoDataDto>.Success(200);
     }
 }

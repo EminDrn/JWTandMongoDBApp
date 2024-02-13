@@ -12,6 +12,7 @@ namespace JWTApp.Mapper
             CreateMap<UserDto, User>().ReverseMap();
             CreateMap<CreateUserDto, User>().ReverseMap();
             CreateMap<LoginDto, User>().ReverseMap();
+            CreateMap<CommentDto, CommentMovie>().ReverseMap();
 
 
         }

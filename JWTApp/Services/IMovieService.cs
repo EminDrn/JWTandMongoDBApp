@@ -12,4 +12,6 @@ public interface IMovieService
     Task<Response<IEnumerable<MovieDto>>> GetAllAsync();
     Task<Response<NoDataDto>> Remove(string id);
     Task<Response<NoDataDto>> Update(MovieDto entity,string id);
+
+    Task<Response<NoDataDto>> RateMove(string id, double rate);
 }

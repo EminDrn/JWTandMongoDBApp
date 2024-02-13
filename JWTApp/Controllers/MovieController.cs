@@ -48,4 +48,10 @@ public class MovieController : BaseController
     {
         return ActionResultInstance(await _movieService.Update(movieDto , id));
     }
+    
+    [HttpPost]
+    public async Task<IActionResult> MovieRate( string id , double rate)
+    {
+        return ActionResultInstance(await _movieService.RateMove(id , rate));
+    }
 }

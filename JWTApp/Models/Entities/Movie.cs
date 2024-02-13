@@ -18,5 +18,7 @@ public class Movie
     public DateTime ReleaseDate { get; set; }
 
     public string MoviePhoto { get; set; }
+    
+    public double RateCounter { get; set; }
 
 }
