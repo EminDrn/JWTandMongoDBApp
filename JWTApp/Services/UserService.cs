@@ -23,7 +23,7 @@ namespace JWTApp.Services
 
         public async Task<Response<UserDto>> CreateUserAsync(CreateUserDto createUserDto)
         {
-            var user = new User { Email = createUserDto.Email, UserName = createUserDto.UserName , Password = createUserDto.Password, CreatedTime = DateTime.Now};
+            var user = new User { Email = createUserDto.Email, Role = "Customer", UserName = createUserDto.UserName , Password = createUserDto.Password, CreatedTime = DateTime.Now};
 
             await _userCollection.InsertOneAsync(user);
 
