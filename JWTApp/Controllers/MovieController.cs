@@ -1,11 +1,13 @@
 ﻿using JWTApp.Models.DTOs;
 using JWTApp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JWTApp.Controllers;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
+[Authorize(Roles = "Customer,Admin")]
 public class MovieController : BaseController
 {
     private readonly IMovieService _movieService;

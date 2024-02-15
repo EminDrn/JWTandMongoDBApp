@@ -82,16 +82,23 @@ public class TokenService:ITokenService
         return Convert.ToBase64String(numberByte);
     }
     
-    private IEnumerable<Claim> GetClaims(User userApp , List<String> audiences) {
+    private IEnumerable<Claim> GetClaims(User userApp , List<String> audiences)
+    {
+
+        var userRoles = userApp.Role;
+        
         var userlist = new List<Claim>
         {
             new Claim(ClaimTypes.NameIdentifier , userApp.Id),
             new Claim(JwtRegisteredClaimNames.Email, userApp.Email),
             new Claim(ClaimTypes.Name , userApp.UserName),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim(ClaimTypes.Role , userApp.Role)
+            
 
         };
         userlist.AddRange(audiences.Select(x=>new Claim(JwtRegisteredClaimNames.Aud,x)));   
+       
         return userlist;
 
     }
